@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+hostnamectl set-hostname x1
+git config --global user.name "Josh Mcguigan"
+git config --global user.email joshmcg88@gmail.com
+
+sudo dnf install vim-enhanced
+
+sudo dnf install gnome-tweak-tool
+
+if [ ! -f ~/.ssh/id_ed25519.pub ]
+then
+    ssh-keygen -t ed25519
+
+    read -p "Manually add public ssh key to github, then press any key.."
+else
+    echo "ssh key detected, skipping creation"
+fi
+
+if ! [ -x "$(command -v cargo)" ]
+then
+    curl https://sh.rustup.rs -sSf | sh
+    # update path after install for the installs below
+    source ~/.profile
+else
+    echo "detected rust installation, skipping install"
+fi
+
+rustup component add rustfmt
+rustup component add clippy
+rustup component add rls rust-analysis rust-src
+
+if ! [ -x "$(command -v watchexec)" ]
+then
+    cargo install watchexec
+else
+    echo "detected watchexec installation, skipping install"
+fi
+
+# dependency of coc-vim
+sudo dnf install nodejs
+
+if [[ ! -d ~/.vim ]]
+then
+    git clone git@github.com:JoshMcguigan/dotvim.git
+else
+    echo "detected .vim directory, skpping vim setup"
+fi
+
+if [[ ! -f ~/.cargo/config ]]
+then
+    mkdir -p ~/.cargo && cp ./.cargo/config ~/.cargo/config
+else
+    echo "detected .cargo directory, skpping cargo setup"
+fi
+
+mkdir -p ~/workspace
+
+read -p "Manually configure caps lock key as escape using gnome tweak tool, then press any key.."
+read -p "Manually install vim vixen plugin for firefox, then press any key.."
+read -p "Manually install uBlock Origin plugin for firefox, then press any key.."
+read -p "Manually configure the terminal copy/paste commands to ctrl-c/ctrl-v, then press any key.."
+read -p "Manually configure the terminal theme to light mode, then press any key.."
