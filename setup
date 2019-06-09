@@ -54,6 +54,19 @@ else
     echo "detected .cargo directory, skpping cargo setup"
 fi
 
+if ! [ -x "$(command -v powerline)" ]
+then
+    sudo dnf install powerline
+    # configure bash to use poewrline
+    cat powerline-bashrc >> ~/.bashrc
+    # configure powerline
+    mkdir -p ~/.config/powerline && cp ./.config/powerline/config.json ~/.config/powerline/config.json
+
+    powerline-daemon --replace
+else
+    echo "detected powerline installation, skipping install"
+fi
+
 mkdir -p ~/workspace
 
 read -p "Manually configure caps lock key as escape using gnome tweak tool, then press any key.."
