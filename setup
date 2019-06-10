@@ -8,6 +8,9 @@ sudo dnf install vim-enhanced
 sudo dnf install gnome-tweak-tool
 sudo dnf install make
 
+# allow fractional scaling
+gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
+
 if [ ! -f ~/.ssh/id_ed25519.pub ]
 then
     ssh-keygen -t ed25519
@@ -78,6 +81,7 @@ fi
 mkdir -p ~/workspace
 
 read -p "Manually configure caps lock key as escape using gnome tweak tool, then press any key.."
+read -p "Manually configure display scaling, then press any key.."
 read -p "Manually install vim vixen plugin for firefox, then press any key.."
 read -p "Manually install uBlock Origin plugin for firefox, then press any key.."
 read -p "Manually configure the terminal copy/paste commands to ctrl-c/ctrl-v, then press any key.."
