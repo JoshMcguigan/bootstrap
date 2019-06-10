@@ -5,8 +5,8 @@ git config --global user.name "Josh Mcguigan"
 git config --global user.email joshmcg88@gmail.com
 
 sudo dnf install vim-enhanced
-
 sudo dnf install gnome-tweak-tool
+sudo dnf install make
 
 if [ ! -f ~/.ssh/id_ed25519.pub ]
 then
