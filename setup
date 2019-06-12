@@ -57,15 +57,14 @@ else
     echo "detected .cargo directory, skpping cargo setup"
 fi
 
-if ! [ -x "$(command -v powerline)" ]
+if ! [ -x "$(command -v powerline-rs)" ]
 then
-    sudo dnf install powerline
-    # configure bash to use poewrline
+    # powerline-rs depends on openssl-devel, likely for git integration
+    sudo dnf install openssl-devel
+    sudo dnf install powerline-fonts
+    cargo install powerline-rs
+    # configure bash to use powerline
     cat powerline-bashrc >> ~/.bashrc
-    # configure powerline
-    mkdir -p ~/.config/powerline && cp ./.config/powerline/config.json ~/.config/powerline/config.json
-
-    powerline-daemon --replace
 else
     echo "detected powerline installation, skipping install"
 fi
