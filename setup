@@ -57,14 +57,10 @@ else
     echo "detected .cargo directory, skpping cargo setup"
 fi
 
-if ! [ -x "$(command -v powerline-rs)" ]
+if ! [ -x "$(command -v pista)" ]
 then
-    # powerline-rs depends on openssl-devel, likely for git integration
-    sudo dnf install openssl-devel
-    sudo dnf install powerline-fonts
-    cargo install powerline-rs
-    # configure bash to use powerline
-    cat powerline-bashrc >> ~/.bashrc
+    cargo install pista
+    cat pista-bashrc >> ~/.bashrc
 else
     echo "detected powerline installation, skipping install"
 fi
@@ -83,7 +79,6 @@ read -p "Manually configure caps lock key as escape using gnome tweak tool, then
 read -p "Manually configure display scaling, then press any key.."
 read -p "Manually install vim vixen plugin for firefox, then press any key.."
 read -p "Manually install uBlock Origin plugin for firefox, then press any key.."
-read -p "Manually configure the terminal copy/paste commands to ctrl-c/ctrl-v, then press any key.."
 read -p "Manually configure the terminal theme to light mode, then press any key.."
 read -p "Manually configure the terminal to disable the bell, then press any key.."
 read -p "Manually run :CocInstall coc-rls within vim (twice), then press any key.."
