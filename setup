@@ -7,6 +7,7 @@ git config --global user.email joshmcg88@gmail.com
 sudo dnf install vim-enhanced
 sudo dnf install gnome-tweak-tool
 sudo dnf install make
+sudo dnf install ripgrep
 
 # allow fractional scaling
 gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
@@ -62,7 +63,7 @@ then
     cargo install pista
     cat pista-bashrc >> ~/.bashrc
 else
-    echo "detected powerline installation, skipping install"
+    echo "detected pista installation, skipping install"
 fi
 
 if [[ ! -f ~/.gitignore_global ]]
