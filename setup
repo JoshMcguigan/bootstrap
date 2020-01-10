@@ -66,6 +66,14 @@ else
     echo "detected pista installation, skipping install"
 fi
 
+if ! [ -x "$(command -v fzf)" ]
+then
+    sudo dnf install fzf
+    cat fzf-bashrc >> ~/.bashrc
+else
+    echo "detected fzf installation, skipping install"
+fi
+
 if [[ ! -f ~/.gitignore_global ]]
 then
     cp ./.gitignore_global ~/.gitignore_global
