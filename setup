@@ -61,7 +61,7 @@ fi
 if ! [ -x "$(command -v pista)" ]
 then
     cargo install pista
-    cat pista-bashrc >> ~/.bashrc
+    echo "source ~/workspace/bootstrap/pista-bashrc" >> ~/.bashrc
 else
     echo "detected pista installation, skipping install"
 fi
@@ -69,7 +69,7 @@ fi
 if ! [ -x "$(command -v fzf)" ]
 then
     sudo dnf install fzf
-    cat fzf-bashrc >> ~/.bashrc
+    echo "source ~/workspace/bootstrap/fzf-bashrc" >> ~/.bashrc
 else
     echo "detected fzf installation, skipping install"
 fi
@@ -82,11 +82,8 @@ else
     echo "detected .gitignore_global, skpping gitignore setup"
 fi
 
-mkdir -p ~/workspace
-
-read -p "Manually configure caps lock key as escape using gnome tweak tool, then press any key.."
+read -p "Manually configure caps lock key as ctrl using gnome tweak tool, then press any key.."
 read -p "Manually configure display scaling, then press any key.."
-read -p "Manually install vim vixen plugin for firefox, then press any key.."
 read -p "Manually install uBlock Origin plugin for firefox, then press any key.."
 read -p "Manually configure the terminal theme to light mode, then press any key.."
 read -p "Manually configure the terminal to disable the bell, then press any key.."
