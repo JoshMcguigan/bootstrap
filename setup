@@ -12,38 +12,38 @@ gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffe
 
 if [ ! -f ~/.ssh/id_ed25519.pub ]
 then
-    ssh-keygen -t ed25519
+	ssh-keygen -t ed25519
 
-    read -p "Manually add public ssh key to github, then press any key.."
+	read -p "Manually add public ssh key to github, then press any key.."
 else
-    echo "ssh key detected, skipping creation"
+	echo "ssh key detected, skipping creation"
 fi
 
 if ! [ -x "$(command -v cargo)" ]
 then
-    curl https://sh.rustup.rs -sSf | sh
-    # update path after install for the installs below
-    source ~/.profile
+	curl https://sh.rustup.rs -sSf | sh
+	# update path after install for the installs below
+	source ~/.profile
 
 	rustup component add rustfmt
 	rustup component add clippy
 	rustup component add rls rust-analysis rust-src
 else
-    echo "detected rust installation, skipping install"
+	echo "detected rust installation, skipping install"
 fi
 
 if [[ ! -f ~/.cargo/config ]]
 then
-    mkdir -p ~/.cargo && ln ./.cargo/config ~/.cargo/config
+	mkdir -p ~/.cargo && ln ./.cargo/config ~/.cargo/config
 else
-    echo "detected .cargo directory, skpping cargo setup"
+	echo "detected .cargo directory, skpping cargo setup"
 fi
 
 if ! [ -x "$(command -v watchexec)" ]
 then
-    cargo install watchexec
+	cargo install watchexec
 else
-    echo "detected watchexec installation, skipping install"
+	echo "detected watchexec installation, skipping install"
 fi
 
 if [[ ! -d ~/.vim ]]
@@ -51,39 +51,39 @@ then
 	# dependency of coc-vim
 	sudo dnf install nodejs
 
-    git clone git@github.com:JoshMcguigan/dotvim.git
+	git clone git@github.com:JoshMcguigan/dotvim.git
 else
-    echo "detected .vim directory, skpping vim setup"
+	echo "detected .vim directory, skpping vim setup"
 fi
 
 if ! [ -x "$(command -v pista)" ]
 then
-    cargo install pista
-    echo "source ~/workspace/bootstrap/pista-bashrc" >> ~/.bashrc
+	cargo install pista
+	echo "source ~/workspace/bootstrap/pista-bashrc" >> ~/.bashrc
 else
-    echo "detected pista installation, skipping install"
+	echo "detected pista installation, skipping install"
 fi
 
 if ! [ -x "$(command -v fzf)" ]
 then
-    sudo dnf install fzf
-    echo "source ~/workspace/bootstrap/fzf-bashrc" >> ~/.bashrc
+	sudo dnf install fzf
+	echo "source ~/workspace/bootstrap/fzf-bashrc" >> ~/.bashrc
 else
-    echo "detected fzf installation, skipping install"
+	echo "detected fzf installation, skipping install"
 fi
 
 if [[ ! -f ~/.gitconfig ]]
 then
 	ln ./.gitconfig ~/.gitconfig
 else
-    echo "detected .gitconfig, skpping gitconfig setup"
+	echo "detected .gitconfig, skpping gitconfig setup"
 fi
 
 if [[ ! -f ~/.gitignore_global ]]
 then
-    ln ./.gitignore_global ~/.gitignore_global
+	ln ./.gitignore_global ~/.gitignore_global
 else
-    echo "detected .gitignore_global, skpping gitignore setup"
+	echo "detected .gitignore_global, skpping gitignore setup"
 fi
 
 read -p "Manually configure caps lock key as ctrl using gnome tweak tool, then press any key.."
