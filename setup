@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-hostnamectl set-hostname x1
-
 sudo dnf install vim-enhanced
 sudo dnf install gnome-tweak-tool
 sudo dnf install make
@@ -86,6 +84,7 @@ else
 	echo "detected .gitignore_global, skpping gitignore setup"
 fi
 
+read -p "Manually set hostname with 'hostnamectl set-hostname \$DESIRED_HOSTNAME', then press any key.."
 read -p "Manually configure caps lock key as ctrl using gnome tweak tool, then press any key.."
 read -p "Manually configure display scaling, then press any key.."
 read -p "Manually install uBlock Origin plugin for firefox, then press any key.."
