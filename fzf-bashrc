@@ -57,7 +57,12 @@ else
   bind '"\C-r": "\C-x\C-addi`__fzf_history__`\C-x\C-e\C-x\C-r\C-x^\C-x\C-a$a\C-x\C-o\C-x\C-p"'
 fi
 
+# bind tab key to accept in CTRL-T mode, to match
+# the behavior set in CTRL-R mode above
+FZF_CTRL_T_OPTS="--bind tab:accept"
+
 # source: https://stackoverflow.com/a/37007733
+# Modified source linked above to bind tab to accept
 
 is_in_git_repo() {
   git rev-parse HEAD > /dev/null 2>&1
@@ -66,37 +71,16 @@ is_in_git_repo() {
 gf() {
   is_in_git_repo &&
     git -c color.status=always status --short |
-    fzf --height 40% -m --ansi --nth 2..,.. | awk '{print $2}'
+    fzf --bind tab:accept --height 40% -m --ansi --nth 2..,.. | awk '{print $2}'
 }
 
 gb() {
   is_in_git_repo &&
     git branch --color=always | grep -v '/HEAD\s' |
-    fzf --height 40% --ansi --multi --tac | sed 's/^..//' | awk '{print $1}' |
+    fzf --bind tab:accept --height 40% --ansi --multi --tac | sed 's/^..//' | awk '{print $1}' |
     sed 's#^remotes/[^/]*/##'
-}
-
-gt() {
-  is_in_git_repo &&
-    git tag --sort -version:refname |
-    fzf --height 40% --multi
-}
-
-gh() {
-  is_in_git_repo &&
-    git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph |
-    fzf --height 40% --ansi --no-sort --reverse --multi | grep -o '[a-f0-9]\{7,\}'
-}
-
-gr() {
-  is_in_git_repo &&
-    git remote -v | awk '{print $1 " " $2}' | uniq |
-    fzf --height 40% --tac | awk '{print $1}'
 }
 
 bind '"\er": redraw-current-line'
 bind '"\C-g\C-f": "$(gf)\e\C-e\er"'
 bind '"\C-g\C-b": "$(gb)\e\C-e\er"'
-bind '"\C-g\C-t": "$(gt)\e\C-e\er"'
-bind '"\C-g\C-h": "$(gh)\e\C-e\er"'
-bind '"\C-g\C-r": "$(gr)\e\C-e\er"'
