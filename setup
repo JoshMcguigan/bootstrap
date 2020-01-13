@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 hostnamectl set-hostname x1
-git config --global user.name "Josh Mcguigan"
-git config --global user.email joshmcg88@gmail.com
 
 sudo dnf install vim-enhanced
 sudo dnf install gnome-tweak-tool
@@ -26,13 +24,20 @@ then
     curl https://sh.rustup.rs -sSf | sh
     # update path after install for the installs below
     source ~/.profile
+
+	rustup component add rustfmt
+	rustup component add clippy
+	rustup component add rls rust-analysis rust-src
 else
     echo "detected rust installation, skipping install"
 fi
 
-rustup component add rustfmt
-rustup component add clippy
-rustup component add rls rust-analysis rust-src
+if [[ ! -f ~/.cargo/config ]]
+then
+    mkdir -p ~/.cargo && ln ./.cargo/config ~/.cargo/config
+else
+    echo "detected .cargo directory, skpping cargo setup"
+fi
 
 if ! [ -x "$(command -v watchexec)" ]
 then
@@ -41,21 +46,14 @@ else
     echo "detected watchexec installation, skipping install"
 fi
 
-# dependency of coc-vim
-sudo dnf install nodejs
-
 if [[ ! -d ~/.vim ]]
 then
+	# dependency of coc-vim
+	sudo dnf install nodejs
+
     git clone git@github.com:JoshMcguigan/dotvim.git
 else
     echo "detected .vim directory, skpping vim setup"
-fi
-
-if [[ ! -f ~/.cargo/config ]]
-then
-    mkdir -p ~/.cargo && cp ./.cargo/config ~/.cargo/config
-else
-    echo "detected .cargo directory, skpping cargo setup"
 fi
 
 if ! [ -x "$(command -v pista)" ]
@@ -74,10 +72,16 @@ else
     echo "detected fzf installation, skipping install"
 fi
 
+if [[ ! -f ~/.gitconfig ]]
+then
+	ln ./.gitconfig ~/.gitconfig
+else
+    echo "detected .gitconfig, skpping gitconfig setup"
+fi
+
 if [[ ! -f ~/.gitignore_global ]]
 then
-    cp ./.gitignore_global ~/.gitignore_global
-    git config --global core.excludesfile ~/.gitignore_global
+    ln ./.gitignore_global ~/.gitignore_global
 else
     echo "detected .gitignore_global, skpping gitignore setup"
 fi
