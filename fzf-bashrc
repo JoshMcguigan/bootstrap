@@ -75,10 +75,7 @@ gf() {
 }
 
 gb() {
-  is_in_git_repo &&
-    git branch --color=always | grep -v '/HEAD\s' |
-    fzf --bind tab:accept --height 40% --ansi --multi --tac | sed 's/^..//' | awk '{print $1}' |
-    sed 's#^remotes/[^/]*/##'
+  (git for-each-ref --format="%(refname)" | grep "^refs/remotes/" | cut -d '/' -f 4- | grep -v "^HEAD$" && git branch --format="%(refname:short)") | sort --unique | fzf
 }
 
 bind '"\er": redraw-current-line'
