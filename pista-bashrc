@@ -5,3 +5,4 @@ prompt() {
     PS1="$(pista)"
 }
 PROMPT_COMMAND=prompt
+export VIRTUAL_ENV_DISABLE_PROMPT=1
