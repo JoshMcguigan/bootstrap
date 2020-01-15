@@ -75,7 +75,7 @@ gf() {
 }
 
 gb() {
-  (git for-each-ref --format="%(refname)" | grep "^refs/remotes/" | cut -d '/' -f 4- | grep -v "^HEAD$" && git branch --format="%(refname:short)") | sort --unique | fzf
+  (git for-each-ref --format="%(refname)" | grep "^refs/remotes/" | cut -d '/' -f 4- | grep -v "^HEAD$" && git branch --format="%(refname:short)") | sort --unique | fzf --bind tab:accept
 }
 
 bind '"\er": redraw-current-line'
