@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
 sudo dnf install vim-enhanced
-sudo dnf install gnome-tweak-tool
 sudo dnf install make
 sudo dnf install ripgrep
 
-# allow fractional scaling
-gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
+# map caps lock to ctrl
+gsettings set org.gnome.desktop.input-sources xkb-options ['ctrl:nocaps']
+
+# set scaling
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 
 if [ ! -f ~/.ssh/id_ed25519.pub ]
 then
@@ -49,7 +51,7 @@ then
 	# dependency of coc-vim
 	sudo dnf install nodejs
 
-	git clone git@github.com:JoshMcguigan/dotvim.git
+	git clone git@github.com:JoshMcguigan/dotvim.git ~/.vim
 else
 	echo "detected .vim directory, skpping vim setup"
 fi
@@ -72,21 +74,19 @@ fi
 
 if [[ ! -f ~/.gitconfig ]]
 then
-	ln ./.gitconfig ~/.gitconfig
+	ln -s ./.gitconfig ~/.gitconfig
 else
 	echo "detected .gitconfig, skpping gitconfig setup"
 fi
 
 if [[ ! -f ~/.gitignore_global ]]
 then
-	ln ./.gitignore_global ~/.gitignore_global
+	ln -s ./.gitignore_global ~/.gitignore_global
 else
 	echo "detected .gitignore_global, skpping gitignore setup"
 fi
 
 read -p "Manually set hostname with 'hostnamectl set-hostname \$DESIRED_HOSTNAME', then press any key.."
-read -p "Manually configure caps lock key as ctrl using gnome tweak tool, then press any key.."
-read -p "Manually configure display scaling, then press any key.."
 read -p "Manually install uBlock Origin plugin for firefox, then press any key.."
 read -p "Manually configure the terminal theme to light mode, then press any key.."
 read -p "Manually configure the terminal to disable the bell, then press any key.."
