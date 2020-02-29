@@ -28,6 +28,10 @@ then
 	rustup component add rustfmt
 	rustup component add clippy
 	rustup component add rls rust-analysis rust-src
+
+	# install rust analyzer and return to current directory
+	git clone https://github.com/rust-analyzer/rust-analyzer ~/workspace/rust-analyzer/ && cd ~/workspace/rust-analyzer/ && cargo xtask install --server
+	cd ~/workspace/bootstrap
 else
 	echo "detected rust installation, skipping install"
 fi
