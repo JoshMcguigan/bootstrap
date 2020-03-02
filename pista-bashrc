@@ -1,6 +1,5 @@
 export SHORTEN_CWD=0
-export CWD_COLOR=magenta
-export PROMPT_CHAR_COLOR=blue
+export BRANCH_COLOR="blue"
 prompt() {
     PS1="$(pista)"
 }
