@@ -76,6 +76,13 @@ else
 	echo "detected fzf installation, skipping install"
 fi
 
+if ! [ -x "$(command -v flake8)" ]
+then
+	pip3 install --user flake8
+else
+	echo "detected flake8 installation, skipping install"
+fi
+
 if [[ ! -f ~/.gitconfig ]]
 then
 	ln -s ./.gitconfig ~/.gitconfig
