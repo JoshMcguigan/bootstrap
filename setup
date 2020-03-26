@@ -25,10 +25,6 @@ then
 	# update path after install for the installs below
 	source ~/.profile
 
-	rustup component add rustfmt
-	rustup component add clippy
-	rustup component add rls rust-analysis rust-src
-
 	# install rust analyzer and return to current directory
 	git clone https://github.com/rust-analyzer/rust-analyzer ~/workspace/rust-analyzer/ && cd ~/workspace/rust-analyzer/ && cargo xtask install --server
 	cd ~/workspace/bootstrap
@@ -36,9 +32,24 @@ else
 	echo "detected rust installation, skipping install"
 fi
 
+if ! [ -x "$(command -v qutebrowser)" ]
+then
+	sudo dnf install qutebrowser
+	sudo dnf install qt5-qtwebengine-freeworld
+else
+	echo "detected qutebrowser installation, skipping install"
+fi
+
+if [[ ! -f ~/.config/qutebrowser/config.py ]]
+then
+	mkdir -p ~/.config/qutebrowser && ln -s ./.config/qutebrowser/config.py ~/.config/qutebrowser/config.py
+else
+	echo "detected qutebrowser config, skpping qutebrowser setup"
+fi
+
 if [[ ! -f ~/.cargo/config ]]
 then
-	mkdir -p ~/.cargo && ln ./.cargo/config ~/.cargo/config
+	mkdir -p ~/.cargo && ln -s ./.cargo/config ~/.cargo/config
 else
 	echo "detected .cargo directory, skpping cargo setup"
 fi
@@ -99,6 +110,5 @@ fi
 
 read -p "Manually set hostname with 'hostnamectl set-hostname \$DESIRED_HOSTNAME', then press any key.."
 read -p "Manually install uBlock Origin plugin for firefox, then press any key.."
-read -p "Manually configure the terminal theme to light mode, then press any key.."
 read -p "Manually configure the terminal to disable the bell, then press any key.."
 read -p "Manually run :CocInstall coc-rls within vim (twice), then press any key.."
