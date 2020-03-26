@@ -42,7 +42,7 @@ fi
 
 if [[ ! -f ~/.config/qutebrowser/config.py ]]
 then
-	mkdir -p ~/.config/qutebrowser && ln -s ./.config/qutebrowser/config.py ~/.config/qutebrowser/config.py
+	mkdir -p ~/.config/qutebrowser && ln -s ~/workspace/bootstrap/.config/qutebrowser/config.py ~/.config/qutebrowser/config.py
 else
 	echo "detected qutebrowser config, skpping qutebrowser setup"
 fi
@@ -96,14 +96,14 @@ fi
 
 if [[ ! -f ~/.gitconfig ]]
 then
-	ln -s ./.gitconfig ~/.gitconfig
+	ln -s ~/workspace/bootstrap/.gitconfig ~/.gitconfig
 else
 	echo "detected .gitconfig, skpping gitconfig setup"
 fi
 
 if [[ ! -f ~/.gitignore_global ]]
 then
-	ln -s ./.gitignore_global ~/.gitignore_global
+	ln -s ~/workspace/bootstrap/.gitignore_global ~/.gitignore_global
 else
 	echo "detected .gitignore_global, skpping gitignore setup"
 fi
