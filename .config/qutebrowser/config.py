@@ -4,9 +4,9 @@ from qutebrowser.config.config import ConfigContainer  # noqa: F401
 config = config  # type: ConfigAPI # noqa: F821 pylint: disable=E0602,C0103
 c = c  # type: ConfigContainer # noqa: F821 pylint: disable=E0602,C0103
 
-c.url.default_page = 'about:blank'
+c.url.default_page = 'https://raw.githubusercontent.com/qutebrowser/qutebrowser/master/doc/img/cheatsheet-big.png'
 c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?hl=en&q={}'}
-c.url.start_pages = 'https://google.com'
+c.url.start_pages = 'https://raw.githubusercontent.com/qutebrowser/qutebrowser/master/doc/img/cheatsheet-big.png'
 
 c.zoom.default = '120%'
 c.fonts.hints = 'bold 14pt default_family'
